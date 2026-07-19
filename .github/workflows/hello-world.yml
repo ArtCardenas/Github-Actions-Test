@@ -20,7 +20,7 @@ jobs:
         # retrieve the contents of the repository
         # find out the last version on GitHub Marketplace, if no version then latest
       - name: check out repository code
-        uses: actions/checout@v4
+        uses: actions/checkout@v4
         # step to run a bash script
       - run: echo "$(cat hello_world.txt)"
       
