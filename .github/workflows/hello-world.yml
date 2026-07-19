@@ -14,8 +14,8 @@ jobs:
     # runner groups for organizational access control
     runs-on: ubuntu-latest
 
-      # add a step to run a script or an action
-      steps: 
+    # add a step to run a script or an action
+    steps: 
         # use the common checkout action
         # retrieve the contents of the repository
         # find out the last version on GitHub Marketplace, if no version then latest
