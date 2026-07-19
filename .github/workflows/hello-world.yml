@@ -1,0 +1,27 @@
+name: hello-world
+
+# event trigger, push a commit, or tag or create a repository from a template
+on: push
+
+# define what will happen on Push Event, start a job
+# each workflow has 1 or more jobs, composed of a sequence of interconnected executable steps
+jobs:
+  # job name
+  hello-world-job:
+
+    # specify a runner, which is the engine (vm) that executes the job within workflow
+    # specify O/S or -latest most recent stable version
+    # runner groups for organizational access control
+    runs-on: ubuntu-latest
+
+      # add a step to run a script or an action
+      steps: 
+        # use the common checkout action
+        # retrieve the contents of the repository
+        # find out the last version on GitHub Marketplace, if no version then latest
+      - name: check out repository code
+        uses: actions/checout@v4
+        # step to run a bash script
+      - run: echo "$(cat hello_world.txt)"
+      
+      
