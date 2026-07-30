@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: checkout repo    # checkout with authentication
-        uses: actions/checout@v4
+        uses: actions/checkout@v4
         with:
           token ${{ secrets.GITHUB_TOKEN }}  # token = golden ticket for authentication purposes
       - name: use node.js      # setup node environment for deploy job, remember, every job runs independently
@@ -71,8 +71,3 @@ jobs:
       - name: deploy    # deploy application to pages
         id: deployment  # we need it to refer from steps.deployment
         uses: actions/deploy-pages@v4
-        
-          
-          
-          
-      
