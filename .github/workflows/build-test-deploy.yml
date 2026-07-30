@@ -71,3 +71,4 @@ jobs:
       - name: deploy    # deploy application to pages
         id: deployment  # we need it to refer from steps.deployment
         uses: actions/deploy-pages@v4
+      - run: echo ${{ steps.deployment.outputs.page_url }}
