@@ -70,5 +70,5 @@ jobs:
           path: './out'
       - name: deploy    # deploy application to pages
         id: deployment  # we need it to refer from steps.deployment
-        uses: actions/deploy-pages@v4  # @v4 is the last one
+        uses: actions/deploy-pages@v5  # @v4 = node 20
       - run: echo ${{ steps.deployment.outputs.page_url }}
