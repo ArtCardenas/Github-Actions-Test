@@ -65,7 +65,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - name: upload artifacts    # collection of files ready to be shared or deployed
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v6  # @v3 = node 20  @v6 = node 24
         with:
           path: './out'
       - name: deploy    # deploy application to pages
