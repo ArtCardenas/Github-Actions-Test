@@ -1,0 +1,73 @@
+name: build-test-deploy
+
+on: push
+
+jobs:
+  build:  # build job
+    # runner engine
+    runs-on: ubuntu-latest
+
+    steps:  # reference code within this repository
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: use node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      #runner commands
+      - run: npm install  # install
+      - run: npm run build  # run its build
+
+
+  test:  # test on a succesfull build - Note: steps are completely independant
+    needs: build  #dependency on build job
+      # runner engine
+    runs-on: ubuntu-latest
+  
+    steps:  # reference code within this repository
+        - name: checkout repo
+          uses: actions/checkout@v4
+        - name: use node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '24.x'
+        #runner commands
+        - run: npm install  #install
+        - run: npm test  # test out the code
+
+  deploy: #deploy job
+    needs: test  # dependency on test job
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write  # token = master key, grants our workflow the power to make changes
+
+    environment:
+      name: production
+      url: ${{ steps.deployment.outputs.page_url }}  # gets from final deployment step
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo    # checkout with authentication
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # token = golden ticket for authentication purposes
+      - name: use node.js      # setup node environment for deploy job, remember, every job runs independently
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      - name: configure github pages  # configure github pages for deployment
+        uses: actions/configure-pages@v4
+        with:
+          statis_site_generator: next
+      - run: npm install
+      - run: npm run build
+      - name: upload artifacts    # collection of files ready to be shared or deployed
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './out'
+      - name: deploy    # deploy application to pages
+        id: deployment  # we need it to refer from steps.deployment
+        uses: actions/deploy-pages@v4
