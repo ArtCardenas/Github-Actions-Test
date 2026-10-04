@@ -10,5 +10,5 @@ To follow along with the step-by-step instructions in the Essentials module, you
 
 Click Create repository from template and we’re ready to build our first Actions workflow!
 
-testing feature/branches "feature/comment1"
+testing feature/branches "feature/comment2"  in VS Code, look at the bottom left corner for branch
 
